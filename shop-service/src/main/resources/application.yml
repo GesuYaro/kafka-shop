@@ -1,0 +1,8 @@
+spring:
+  datasource:
+    url: ${SHOP_DB_URL}
+    username: ${SHOP_DB_USERNAME}
+    password: ${SHOP_DB_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: update

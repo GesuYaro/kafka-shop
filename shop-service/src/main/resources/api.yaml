@@ -1,0 +1,74 @@
+openapi: 3.0.3
+info:
+  title: Title
+  description: Title
+  version: 1.0.0
+servers:
+  - url: 'https'
+paths:
+  /products:
+    get:
+      summary: List all products
+      operationId: listProducts
+      tags:
+        - products
+      responses:
+        '200':
+          description: An paged array of products
+          headers:
+            x-next:
+              description: A link to the next page of responses
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProductDto"
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+components:
+  schemas:
+    ShopDto:
+      type: object
+      required:
+        - id
+        - city
+      properties:
+        id:
+          type: string
+          format: uuid
+        city:
+          type: string
+    ProductDto:
+      type: object
+      required:
+        - id
+        - name
+        - category
+        - price
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        category:
+          type: string
+          format: uuid
+        price:
+          type: number
+          format: double
+    Error:
+      type: object
+      required:
+        - description
+        - name
+      properties:
+        description:
+          type: string
+        name:
+          type: string
